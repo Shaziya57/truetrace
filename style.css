@@ -1,0 +1,289 @@
+/* ==========================================================================
+   Modern Calculator Stylesheet
+   - Clean, modern, neomorphic/glass-inspired aesthetic
+   - Accessible, responsive layout for mobile and desktop
+   - Fluid typography and soft shadows
+   ========================================================================== */
+
+:root {
+  --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #312e81 100%);
+  --card-bg: rgba(30, 41, 59, 0.75);
+  --card-border: rgba(255, 255, 255, 0.1);
+  --card-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.05);
+
+  --display-bg: rgba(15, 23, 42, 0.6);
+  --display-border: rgba(255, 255, 255, 0.08);
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --text-accent: #38bdf8;
+  --text-error: #f87171;
+
+  /* Button palettes */
+  --btn-num-bg: rgba(51, 65, 85, 0.6);
+  --btn-num-hover: rgba(71, 85, 105, 0.8);
+  --btn-num-active: rgba(100, 116, 139, 0.9);
+  --btn-num-text: #f8fafc;
+
+  --btn-action-bg: rgba(239, 68, 68, 0.15);
+  --btn-action-hover: rgba(239, 68, 68, 0.25);
+  --btn-action-active: rgba(239, 68, 68, 0.35);
+  --btn-action-text: #fca5a5;
+
+  --btn-op-bg: rgba(99, 102, 241, 0.2);
+  --btn-op-hover: rgba(99, 102, 241, 0.35);
+  --btn-op-active: rgba(99, 102, 241, 0.5);
+  --btn-op-text: #a5b4fc;
+
+  --btn-eq-bg: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+  --btn-eq-hover: linear-gradient(135deg, #818cf8 0%, #6366f1 100%);
+  --btn-eq-active: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%);
+  --btn-eq-text: #ffffff;
+  --btn-eq-shadow: 0 10px 20px -5px rgba(99, 102, 241, 0.5);
+
+  --radius-card: 28px;
+  --radius-btn: 18px;
+  --radius-display: 18px;
+  --transition: all 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 16px;
+  background: var(--bg-gradient);
+  background-attachment: fixed;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  color: var(--text-main);
+  -webkit-font-smoothing: antialiased;
+}
+
+.calculator-container {
+  width: 100%;
+  max-width: 380px;
+  margin: auto;
+}
+
+.calculator-card {
+  background: var(--card-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--card-shadow);
+  padding: 24px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* Header */
+.calculator-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 4px;
+}
+
+.calculator-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.indicator-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background: #10b981;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #10b981;
+}
+
+/* Display Screen */
+.calculator-display {
+  background: var(--display-bg);
+  border: 1px solid var(--display-border);
+  border-radius: var(--radius-display);
+  padding: 18px 20px;
+  min-height: 96px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+  word-break: break-all;
+  overflow: hidden;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.previous-operand {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  font-weight: 500;
+  min-height: 22px;
+  line-height: 1.4;
+  letter-spacing: 1px;
+}
+
+.current-operand {
+  color: var(--text-main);
+  font-size: 2.4rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.5px;
+  transition: font-size 0.15s ease;
+}
+
+.current-operand.error {
+  color: var(--text-error);
+  font-size: 1.4rem;
+}
+
+/* Keypad Grid */
+.calculator-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(5, 62px);
+  gap: 12px;
+}
+
+/* Buttons */
+.btn {
+  font-family: inherit;
+  font-size: 1.25rem;
+  font-weight: 600;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius-btn);
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: var(--transition);
+  outline: none;
+}
+
+.btn:focus-visible {
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.6);
+}
+
+.btn:active, .btn.active {
+  transform: scale(0.94);
+}
+
+/* Button Variants */
+.btn-number {
+  background: var(--btn-num-bg);
+  color: var(--btn-num-text);
+}
+
+.btn-number:hover {
+  background: var(--btn-num-hover);
+}
+
+.btn-number:active, .btn-number.active {
+  background: var(--btn-num-active);
+}
+
+.btn-action {
+  background: var(--btn-action-bg);
+  color: var(--btn-action-text);
+}
+
+.btn-action:hover {
+  background: var(--btn-action-hover);
+}
+
+.btn-action:active, .btn-action.active {
+  background: var(--btn-action-active);
+}
+
+.btn-operator {
+  background: var(--btn-op-bg);
+  color: var(--btn-op-text);
+  font-size: 1.35rem;
+}
+
+.btn-operator:hover {
+  background: var(--btn-op-hover);
+}
+
+.btn-operator:active, .btn-operator.active, .btn-operator.operator-selected {
+  background: var(--btn-op-active);
+  color: #ffffff;
+  border-color: rgba(165, 180, 252, 0.4);
+}
+
+.btn-equals {
+  grid-row: span 2;
+  background: var(--btn-eq-bg);
+  color: var(--btn-eq-text);
+  box-shadow: var(--btn-eq-shadow);
+  font-size: 1.6rem;
+}
+
+.btn-equals:hover {
+  background: var(--btn-eq-hover);
+  box-shadow: 0 12px 24px -4px rgba(99, 102, 241, 0.6);
+}
+
+.btn-equals:active, .btn-equals.active {
+  background: var(--btn-eq-active);
+}
+
+.btn-zero {
+  grid-column: span 2;
+  border-radius: var(--radius-btn);
+}
+
+/* Footer / Keyboard hints */
+.calculator-footer {
+  text-align: center;
+  padding-top: 4px;
+}
+
+.keyboard-hint {
+  font-size: 0.72rem;
+  color: rgba(148, 163, 184, 0.7);
+  letter-spacing: 0.3px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 420px) {
+  body {
+    padding: 12px;
+  }
+
+  .calculator-card {
+    padding: 18px 14px 14px;
+    border-radius: 24px;
+    gap: 14px;
+  }
+
+  .calculator-grid {
+    grid-template-rows: repeat(5, 56px);
+    gap: 10px;
+  }
+
+  .btn {
+    font-size: 1.15rem;
+    border-radius: 14px;
+  }
+
+  .current-operand {
+    font-size: 2rem;
+  }
+
+  .keyboard-hint {
+    font-size: 0.68rem;
+  }
+}

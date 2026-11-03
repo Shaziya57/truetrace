@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modern Calculator</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <main class="calculator-container" role="region" aria-label="Calculator">
+    <div class="calculator-card">
+      <header class="calculator-header">
+        <h1 class="calculator-title">Calculator</h1>
+        <div class="header-indicator" aria-hidden="true">
+          <span class="indicator-dot"></span>
+        </div>
+      </header>
+
+      <section class="calculator-display" aria-live="polite">
+        <div class="previous-operand" id="previous-operand" aria-label="Previous input"></div>
+        <div class="current-operand" id="current-operand" aria-label="Current input">0</div>
+      </section>
+
+      <div class="calculator-grid" role="group" aria-label="Calculator keypad">
+        <!-- Row 1: Actions -->
+        <button type="button" class="btn btn-action" id="btn-clear" data-action="clear" aria-label="Clear all">C</button>
+        <button type="button" class="btn btn-action" id="btn-delete" data-action="delete" aria-label="Delete last character">⌫</button>
+        <button type="button" class="btn btn-operator" data-operator="÷" aria-label="Divide">÷</button>
+        <button type="button" class="btn btn-operator" data-operator="×" aria-label="Multiply">×</button>
+
+        <!-- Row 2 -->
+        <button type="button" class="btn btn-number" data-number="7">7</button>
+        <button type="button" class="btn btn-number" data-number="8">8</button>
+        <button type="button" class="btn btn-number" data-number="9">9</button>
+        <button type="button" class="btn btn-operator" data-operator="-" aria-label="Subtract">-</button>
+
+        <!-- Row 3 -->
+        <button type="button" class="btn btn-number" data-number="4">4</button>
+        <button type="button" class="btn btn-number" data-number="5">5</button>
+        <button type="button" class="btn btn-number" data-number="6">6</button>
+        <button type="button" class="btn btn-operator" data-operator="+" aria-label="Add">+</button>
+
+        <!-- Row 4 -->
+        <button type="button" class="btn btn-number" data-number="1">1</button>
+        <button type="button" class="btn btn-number" data-number="2">2</button>
+        <button type="button" class="btn btn-number" data-number="3">3</button>
+        <button type="button" class="btn btn-equals" id="btn-equals" data-action="equals" aria-label="Equals">=</button>
+
+        <!-- Row 5 -->
+        <button type="button" class="btn btn-number btn-zero" data-number="0">0</button>
+        <button type="button" class="btn btn-number" data-action="decimal" aria-label="Decimal point">.</button>
+      </div>
+
+      <footer class="calculator-footer">
+        <span class="keyboard-hint">Keyboard friendly: 0-9, +, -, *, /, Enter, Backspace, Esc</span>
+      </footer>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
